@@ -16,8 +16,4 @@ for i,tweet in enumerate(sntwitter.TwitterSearchScraper('from:'+name).get_items(
    tweet_data.append([tweet.date, tweet.content, tweet.id, tweet.url, tweet.user, tweet.replyCount, tweet.retweetCount, tweet.likeCount, tweet.lang])
 df=pd.DataFrame(tweet_data)
 st.write(df)
-st.download_button(
-    label="Click this button to download the data",
-    data=df,
-    mime='text/csv',
-)
+st.download_button("Click this button to download the data",df)
