@@ -11,7 +11,7 @@ name= st.text_input("Scrape data by name or hastag", value="")
 
 tweet_data=[]
 for i,tweet in enumerate(sntwitter.TwitterSearchScraper('from:'+name).get_items()):
-   if i>100:
+   if i>10:
         break
    tweet_data.append([tweet.date, tweet.likeCount, tweet.sourceLabel, tweet.content])
 df=pd.DataFrame(tweet_data)
