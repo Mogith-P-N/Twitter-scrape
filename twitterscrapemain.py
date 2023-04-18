@@ -9,9 +9,14 @@ st.title("Twitter scrape")
 #input account name or topic or hashtag to scrape data from twitter
 name= st.text_input("Scrape data by name or hastag", value="")
 
-data=[]
+tweet_data=[]
 for i,tweet in enumerate(sntwitter.TwitterSearchScraper('from:'+name).get_items()):
    if i>100:
         break
-   data.append([tweet.date, tweet.likeCount, tweet.sourceLabel, tweet.content])
-st.write(data)
+   tweet_data.append([tweet.date, tweet.likeCount, tweet.sourceLabel, tweet.content])
+st.write(tweet_data)
+st.download_button(
+    label="Click this button to download the data",
+    data=tweet_data,
+    mime='text/csv',
+)
