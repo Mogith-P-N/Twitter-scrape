@@ -2,6 +2,12 @@ import pandas as pd
 import streamlit as st
 import snscrape.modules.twitter as sntwitter
 
+
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
+
 #page setup 
 st.set_page_config(page_title="Twitter scrape", page_icon="🐍", layout="wide")
 st.title("Twitter scrape")
@@ -14,6 +20,15 @@ for i,tweet in enumerate(sntwitter.TwitterSearchScraper('from:'+name).get_items(
    if i>10:
         break
    tweet_data.append([tweet.date, tweet.content, tweet.id, tweet.url, tweet.user, tweet.replyCount, tweet.retweetCount, tweet.likeCount, tweet.lang])
+
+
 df=pd.DataFrame(tweet_data)
 st.write(df)
-st.download_button("Click this button to download the data",df)
+
+csv=convert_df(df)
+st.download_button(
+    label="Click this button to download the data",
+    data=csv,
+    file_name='scrapped_df.csv',
+    mime='text/csv',
+)
