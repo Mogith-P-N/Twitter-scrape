@@ -14,10 +14,10 @@ for i,tweet in enumerate(sntwitter.TwitterSearchScraper('from:'+name).get_items(
    if i>100:
         break
    tweet_data.append([tweet.date, tweet.likeCount, tweet.sourceLabel, tweet.content])
-tweet_data=pd.DataFrame(tweet_data)
-st.write(tweet_data)
+df=pd.DataFrame(tweet_data)
+st.write(df)
 st.download_button(
     label="Click this button to download the data",
-    data=tweet_data,
+    data=df,
     mime='text/csv',
 )
