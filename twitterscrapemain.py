@@ -15,6 +15,14 @@ st.title("Twitter scrape")
 #input account name or topic or hashtag to scrape data from twitter
 name= st.text_input("Scrape data by name or hastag", value="")
 
+#date range 
+start_date = st.date_input('Start date', value='')
+end_date = st.date_input('End date', value='')
+if start_date < end_date:
+    st.success('Start date: `%s`\n\nEnd date:`%s`' % (start_date, end_date))
+else:
+    st.error('Error: End date must fall after start date.')
+
 tweet_data=[]
 for i,tweet in enumerate(sntwitter.TwitterSearchScraper('from:'+name).get_items()):
    if i>10:
