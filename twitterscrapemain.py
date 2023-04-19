@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 import snscrape.modules.twitter as sntwitter
-
+import datetime
 
 @st.cache
 def convert_df(df):
@@ -16,8 +16,8 @@ st.title("Twitter scrape")
 name= st.text_input("Scrape data by name or hastag", value="")
 
 #date range 
-start_date = st.date_input('Start date', value='')
-end_date = st.date_input('End date', value='')
+start_date = st.date_input('Start date', datetime.date.today())
+end_date = st.date_input('End date', (datetime.date.today() + datetime.timedelta(days=1)))
 if start_date < end_date:
     st.success('Start date: `%s`\n\nEnd date:`%s`' % (start_date, end_date))
 else:
